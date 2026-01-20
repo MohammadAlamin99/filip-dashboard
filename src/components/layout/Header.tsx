@@ -1,4 +1,5 @@
-import { Menu, Search } from "lucide-react";
+import { Bell, Menu, Search } from "lucide-react";
+
 
 type HeaderProps = {
     onMenuClick: () => void;
@@ -19,10 +20,10 @@ export default function Header({ onMenuClick }: HeaderProps) {
                     </button>
 
                     <div>
-                        <h1 className="text-lg md:text-xl font-semibold">
+                        <h1 className="text-[24px] md:text-xl font-bold leading-8 mb-1">
                             Dashboard
                         </h1>
-                        <p className="text-sm text-gray-400 hidden sm:block">
+                        <p className="text-[14px] font-inter font-normal text-[#9CA3AF] hidden sm:block">
                             Welcome back! Here's what's happening.
                         </p>
                     </div>
@@ -32,8 +33,9 @@ export default function Header({ onMenuClick }: HeaderProps) {
                 <div className="flex items-center gap-3">
                     <div className="relative hidden sm:block">
                         <Search
-                            size={16}
-                            className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                            size={20}
+                            color="#fff"
+                            className="absolute left-3 top-1/2 -translate-y-1/2"
                         />
                         <input
                             placeholder="Search..."
@@ -41,11 +43,15 @@ export default function Header({ onMenuClick }: HeaderProps) {
                         />
                     </div>
 
-                    <div className="text-right">
-                        <div className="font-medium">Admin User</div>
-                        <div className="text-xs text-gray-400 hidden sm:block">
-                            Administrator
+                    <div className="flex items-center gap-3">
+                        <Bell />
+                        <div>
+                            <div className="font-medium">Admin User</div>
+                            <div className="text-xs text-gray-400 hidden sm:block">
+                                Administrator
+                            </div>
                         </div>
+                        <img className="w-11 h-11 rounded-full object-cover" src="https://media.istockphoto.com/id/1448167415/photo/smiling-indian-businessman-in-suit-and-glasses-with-laptop-near-office-building.jpg?s=612x612&w=0&k=20&c=vuUgcc-IlZewhnRm7yNOIuEfAvTnyJdMsPbnvkAnZjc=" alt="" />
                     </div>
                 </div>
             </div>
