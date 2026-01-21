@@ -1,4 +1,3 @@
-import { CheckCircle } from "lucide-react";
 import Card from "./Card";
 
 export default function RecentJobs() {
