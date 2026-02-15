@@ -53,7 +53,7 @@ export default function RecentJobs() {
                         </div>
 
                         <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-start gap-2 sm:text-right flex-shrink-0">
-                            <p className="text-[#FBB040] font-semibold text-sm sm:text-base">{job.rate}<span className="text-xs text-gray-400">/Hr</span></p>
+                            <p className="text-[#FBB040] font-semibold text-sm sm:text-base">{job.rate}<span className="text-xs text-[#FBB040]">/Hr</span></p>
                             <span className="text-xs text-gray-500">
                                 {job.date}
                             </span>

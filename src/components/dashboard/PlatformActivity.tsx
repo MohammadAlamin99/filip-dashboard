@@ -20,7 +20,7 @@ export default function PlatformActivity() {
                         >
                             {m.value}
                         </p>
-                        <p className="text-xs sm:text-sm text-gray-400 mt-1">{m.label}</p>
+                        <p className="text-xs sm:text-sm text-[#FBB040] mt-1">{m.label}</p>
                     </Card>
                 ))}
             </div>

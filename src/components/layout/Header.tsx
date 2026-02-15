@@ -1,4 +1,4 @@
-import { Menu, Search } from "lucide-react";
+import { Menu, Search, Bell } from "lucide-react";
 
 type HeaderProps = {
     onMenuClick: () => void;
@@ -32,16 +32,22 @@ export default function Header({ onMenuClick, title = "Dashboard", subtitle = "W
 
                 {/* Right */}
                 <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
-                    <div className="relative hidden md:block">
+                    <div className="relative flex-1 md:flex-none">
                         <Search
                             size={16}
                             className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
                         />
                         <input
                             placeholder="Search..."
-                            className="pl-9 pr-4 py-2 bg-[#1f1f1f] border border-[#2a2a2a] rounded-full text-sm focus:outline-none w-40 lg:w-48"
+                            className="pl-9 pr-4 py-2 bg-[#1f1f1f] border border-[#2a2a2a] rounded-full text-sm focus:outline-none w-34 md:w-40 lg:w-48"
                         />
                     </div>
+
+                    {/* Notification Icon */}
+                    <button className="relative flex-shrink-0 hover:opacity-80 transition-opacity">
+                        <Bell size={20} className="text-gray-300" />
+                        <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+                    </button>
 
                     <div className="flex items-center gap-2 sm:gap-3">
                         <div className="text-right hidden sm:block">

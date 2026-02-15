@@ -122,13 +122,13 @@ export default function Employers() {
                                         <p className="text-xs text-gray-400">Jobs Posted</p>
                                     </div>
                                     <div className="text-center">
-                                        <p className="text-lg font-bold flex items-center justify-center gap-1">
-                                            {employer.rating} <Star size={14} fill="#FBB040" className="text-[#FBB040]" />
+                                        <p className="text-lg text-[#FCD34D] font-bold flex items-center justify-center gap-1">
+                                            {employer.rating} <Star size={14} fill="#FBB040" className="text-[#FCD34D]" />
                                         </p>
                                         <p className="text-xs text-gray-400">Ratings</p>
                                     </div>
                                     <div className="text-center">
-                                        <p className="text-lg font-bold text-[#4CAF50]">{employer.location}</p>
+                                        <p className="text-lg font-bold text-[#FCD34D]">{employer.location}</p>
                                         <p className="text-xs text-gray-400">Location</p>
                                     </div>
                                 </div>
