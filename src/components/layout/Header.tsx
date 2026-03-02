@@ -7,6 +7,10 @@ type HeaderProps = {
 };
 
 export default function Header({ onMenuClick, title = "Dashboard", subtitle = "Welcome back! Here's what's happening." }: HeaderProps) {
+    // Fetch the admin data from localStorage
+    const adminData = JSON.parse(localStorage.getItem("admin") || "{}");
+    console.log(adminData);
+
     return (
         <header className="px-4 md:px-6 py-4 border-b border-[#2a2a2a]">
             <div className="flex items-center justify-between gap-4">
@@ -51,14 +55,16 @@ export default function Header({ onMenuClick, title = "Dashboard", subtitle = "W
 
                     <div className="flex items-center gap-2 sm:gap-3">
                         <div className="text-right hidden sm:block">
-                            <div className="font-medium text-sm">Admin User</div>
+                            {/* Display admin name */}
+                            <div className="font-medium text-sm">{adminData.firstName} {adminData.lastName}</div>
                             <div className="text-xs text-gray-400">
                                 Administrator
                             </div>
                         </div>
+                        {/* Display admin avatar */}
                         <img 
                             className="w-9 h-9 sm:w-10 sm:h-10 rounded-full object-cover" 
-                            src="https://media.istockphoto.com/id/1448167415/photo/smiling-indian-businessman-in-suit-and-glasses-with-laptop-near-office-building.jpg?s=612x612&w=0&k=20&c=vuUgcc-IlZewhnRm7yNOIuEfAvTnyJdMsPbnvkAnZjc=" 
+                            src={adminData.profilePicture || "https://via.placeholder.com/150"} // Fallback image if no profile picture
                             alt="Admin avatar" 
                         />
                     </div>

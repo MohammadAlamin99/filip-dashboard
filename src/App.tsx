@@ -1,20 +1,72 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+// import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+// import LoginPage from './pages/LoginPage'; // Ensure this is correct path
+// import Dashboard from './pages/Dashboard';
+// import Workers from './pages/Workers';
+// import Employers from './pages/Employers';
+// import Availability from './pages/Availability';
+// import SettingsPage from './pages/Settings';
+
+// export default function App() {
+//   const isLoggedIn = localStorage.getItem('admin'); // Check if admin is logged in
+
+//   return (
+//     <BrowserRouter>
+//       <Routes>
+//         {/* Route for LoginPage */}
+//         <Route path="/login" element={<LoginPage />} />
+
+//         {/* Protect other routes by checking if admin is logged in */}
+//         <Route path="/" element={isLoggedIn ? <Dashboard /> : <Navigate to="/login" />} />
+//         <Route path="/workers" element={isLoggedIn ? <Workers /> : <Navigate to="/login" />} />
+//         <Route path="/employers" element={isLoggedIn ? <Employers /> : <Navigate to="/login" />} />
+//         <Route path="/availability" element={isLoggedIn ? <Availability /> : <Navigate to="/login" />} />
+//         <Route path="/settings" element={isLoggedIn ? <SettingsPage /> : <Navigate to="/login" />} />
+//       </Routes>
+//     </BrowserRouter>
+//   );
+// }
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import type { RootState } from "./store";
+
+import LoginPage from "./pages/LoginPage";
 import Dashboard from "./pages/Dashboard";
 import Workers from "./pages/Workers";
 import Employers from "./pages/Employers";
 import Availability from "./pages/Availability";
 import SettingsPage from "./pages/Settings";
 
-export default function App() {
+function App() {
+  const admin = useSelector((state: RootState) => state.auth.admin);
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/workers" element={<Workers />} />
-        <Route path="/employers" element={<Employers />} />
-        <Route path="/availability" element={<Availability />} />
-        <Route path="/settings" element={<SettingsPage />} />
+        <Route path="/login" element={<LoginPage />} />
+
+        <Route
+          path="/"
+          element={admin ? <Dashboard /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/workers"
+          element={admin ? <Workers /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/employers"
+          element={admin ? <Employers /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/availability"
+          element={admin ? <Availability /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/settings"
+          element={admin ? <SettingsPage /> : <Navigate to="/login" />}
+        />
       </Routes>
     </BrowserRouter>
   );
 }
+
+export default App;

@@ -1,13 +1,7 @@
-import {
-    LogOut,
-    X,
-    LayoutDashboard,
-    Users,
-    Briefcase,
-    CalendarCheck,
-    Settings
-} from "lucide-react";
+import { LogOut, X, LayoutDashboard, Users, Briefcase, CalendarCheck, Settings } from "lucide-react";
 import { NavLink, useLocation } from "react-router-dom";
+import { signOut } from "firebase/auth"; // Import Firebase signOut
+import { auth } from "../../firebaseConfig"; // Import initialized services
 
 type SidebarProps = {
     open: boolean;
@@ -25,9 +19,23 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
         { label: "Settings", icon: Settings, path: "/settings" },
     ];
 
+    const handleLogout = async () => {
+        try {
+            // Sign out the user
+            await signOut(auth);
+
+            // Clear the localStorage
+            localStorage.removeItem("admin");
+
+            // Redirect to login page or home page
+            window.location.href = "/login"; // Redirecting to login page
+        } catch (error) {
+            console.error("Error logging out: ", error);
+        }
+    };
+
     return (
         <>
-            {/* Overlay (mobile only) */}
             <div
                 onClick={onClose}
                 className={`
@@ -38,30 +46,28 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
                 `}
             />
 
-            {/* Sidebar */}
-
             <aside
                 className={`
-        h-screen fixed md:static z-50 w-64
-        bg-[#1b1b1b] border-r border-[#2a2a2a]
-        transform transition-transform duration-300 ease-in-out
-        flex flex-col
-        ${open ? "translate-x-0" : "-translate-x-full"}
-        md:translate-x-0
-    `}
+                    h-screen fixed md:static z-50 w-64
+                    bg-[#1b1b1b] border-r border-[#2a2a2a]
+                    transform transition-transform duration-300 ease-in-out
+                    flex flex-col
+                    ${open ? "translate-x-0" : "-translate-x-full"}
+                    md:translate-x-0
+                `}
             >
                 {/* Header */}
                 <div className="px-6 py-5 flex items-center justify-between">
                     <span
                         className="
-      font-bold not-italic
-      text-[40px] leading-[1]
-      tracking-[0]
-      capitalize
-      bg-[linear-gradient(90deg,#CDAC61_0%,#F9F1BA_23.88%,#BA943E_48.95%,#FAF4BB_74.38%,#B88D3D_100%)]
-      bg-clip-text text-transparent
-      text-center
-    "
+                            font-bold not-italic
+                            text-[40px] leading-[1]
+                            tracking-[0]
+                            capitalize
+                            bg-[linear-gradient(90deg,#CDAC61_0%,#F9F1BA_23.88%,#BA943E_48.95%,#FAF4BB_74.38%,#B88D3D_100%)]
+                            bg-clip-text text-transparent
+                            text-center
+                        "
                     >
                         GoldShift
                     </span>
@@ -74,9 +80,6 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
                     </button>
                 </div>
 
-
-
-
                 {/* Navigation */}
                 <nav className="flex-1 px-3 space-y-1">
                     {items.map(({ label, icon: Icon, path }) => {
@@ -88,14 +91,14 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
                                 to={path}
                                 onClick={onClose}
                                 className={`
-                        w-full px-4 py-3 rounded-lg
-                        flex items-center gap-3 text-left font-medium
-                        transition-colors
-                        ${active
+                                    w-full px-4 py-3 rounded-lg
+                                    flex items-center gap-3 text-left font-medium
+                                    transition-colors
+                                    ${active
                                         ? "bg-[#FBB040] text-[#030712]"
                                         : "text-gray-300 hover:bg-[#2a2a2a]"
                                     }
-                    `}
+                                `}
                             >
                                 <Icon size={18} />
                                 <span>{label}</span>
@@ -104,16 +107,17 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
                     })}
                 </nav>
 
-                {/* Logout (bottom) */}
+                {/* Logout Button (Bottom) */}
                 <button
+                    onClick={handleLogout}
                     className="
-            m-4 mt-auto
-            flex items-center justify-center gap-2
-            border border-red-500 text-red-500
-            rounded-lg py-3
-            hover:bg-red-500 hover:text-black
-            transition-colors
-        "
+                        m-4 mt-auto
+                        flex items-center justify-center gap-2
+                        border border-red-500 text-red-500
+                        rounded-lg py-3
+                        hover:bg-red-500 hover:text-black
+                        transition-colors
+                    "
                 >
                     <LogOut size={16} />
                     Logout
